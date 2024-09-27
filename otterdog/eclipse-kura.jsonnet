@@ -2,13 +2,22 @@ local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
 orgs.newOrg('eclipse-kura') {
   settings+: {
-    plan: "free",
-    two_factor_requirement: false,
+    description: "",
+    name: "Eclipse Kura",
     web_commit_signoff_required: false,
     workflows+: {
       actions_can_approve_pull_request_reviews: false,
     },
   },
+  webhooks+: [
+    orgs.newOrgWebhook('https://ci.eclipse.org/kura/github-webhook/') {
+      content_type: "json",
+      events+: [
+        "pull_request",
+        "push"
+      ],
+    },
+  ],
   _repositories+:: [
     orgs.newRepo('kura') {
       allow_rebase_merge: false,
@@ -121,24 +130,6 @@ orgs.newOrg('eclipse-kura') {
       workflows+: {
         enabled: false,
       },
-    },
-    orgs.newRepo('kura.github.io') {
-      allow_merge_commit: true,
-      allow_update_branch: false,
-      default_branch: "master",
-      delete_branch_on_merge: false,
-      gh_pages_build_type: "legacy",
-      gh_pages_source_branch: "master",
-      gh_pages_source_path: "/",
-      web_commit_signoff_required: false,
-      environments: [
-        orgs.newEnvironment('github-pages') {
-          branch_policies+: [
-            "master"
-          ],
-          deployment_branch_policy: "selected",
-        },
-      ],
     },
   ],
 }
