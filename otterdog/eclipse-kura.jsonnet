@@ -1,0 +1,147 @@
+local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
+
+orgs.newOrg('eclipse-kura') {
+  settings+: {
+    members_can_change_project_visibility: false,
+    packages_containers_internal: false,
+    packages_containers_public: false,
+    plan: "free",
+    two_factor_requirement: false,
+    web_commit_signoff_required: false,
+    workflows+: {
+      actions_can_approve_pull_request_reviews: false,
+    },
+  },
+  _repositories+:: [
+    orgs.newRepo('kura') {
+      allow_rebase_merge: false,
+      code_scanning_default_languages+: [
+        "javascript",
+        "javascript-typescript",
+        "python",
+        "typescript"
+      ],
+      code_scanning_default_setup_enabled: true,
+      default_branch: "develop",
+      delete_branch_on_merge: false,
+      dependabot_security_updates_enabled: true,
+      description: "Eclipse Kura™ is a versatile framework to supercharge your edge devices, streamlining the process of configuring your gateway, connecting sensors, and IoT devices to seamlessly collect, process, and send data to the cloud.",
+      gh_pages_build_type: "legacy",
+      gh_pages_source_branch: "gh-pages",
+      gh_pages_source_path: "/",
+      has_discussions: true,
+      homepage: "https://eclipse.dev/kura/",
+      squash_merge_commit_title: "PR_TITLE",
+      topics+: [
+        "eclipseiot",
+        "gateway",
+        "internet-of-things",
+        "iot",
+        "java"
+      ],
+      web_commit_signoff_required: false,
+      webhooks: [
+        orgs.newRepoWebhook('https://hooks.dependencyci.com/events') {
+          content_type: "json",
+          events+: [
+            "pull_request",
+            "push"
+          ],
+          secret: "********",
+        },
+        orgs.newRepoWebhook('https://app.fossa.io/hooks/github/git%2Bhttps%3A%2F%2Fgithub.com%2Feclipse%2Fkura') {
+          content_type: "json",
+          events+: [
+            "pull_request",
+            "push"
+          ],
+          secret: "********",
+        },
+        orgs.newRepoWebhook('https://notify.travis-ci.org') {
+          events+: [
+            "create",
+            "delete",
+            "issue_comment",
+            "member",
+            "public",
+            "pull_request",
+            "push",
+            "repository"
+          ],
+        },
+        orgs.newRepoWebhook('https://webhooks.gitter.im/e/65c284ac4a47d5410a93') {
+          events+: [
+            "issue_comment",
+            "issues",
+            "pull_request",
+            "push"
+          ],
+          secret: "********",
+        },
+        orgs.newRepoWebhook('https://ci.eclipse.org/kura/github-webhook/') {
+          content_type: "json",
+          events+: [
+            "create",
+            "delete",
+            "pull_request",
+            "push"
+          ],
+          secret: "********",
+        },
+      ],
+      branch_protection_rules: [
+        orgs.newBranchProtectionRule('develop') {
+          dismisses_stale_reviews: true,
+          require_last_push_approval: true,
+          required_approving_review_count: 1,
+          requires_strict_status_checks: true,
+        },
+      ],
+      environments: [
+        orgs.newEnvironment('github-pages') {
+          branch_policies+: [
+            "gh-pages",
+            "gh-pages-backup"
+          ],
+          deployment_branch_policy: "selected",
+        },
+      ],
+    },
+    orgs.newRepo('kura-apps') {
+      allow_merge_commit: true,
+      allow_update_branch: false,
+      default_branch: "master",
+      delete_branch_on_merge: false,
+      has_wiki: false,
+      web_commit_signoff_required: false,
+    },
+    orgs.newRepo('kura-website') {
+      allow_merge_commit: true,
+      allow_update_branch: false,
+      default_branch: "master",
+      delete_branch_on_merge: false,
+      web_commit_signoff_required: false,
+      workflows+: {
+        enabled: false,
+      },
+    },
+    orgs.newRepo('kura.github.io') {
+      allow_merge_commit: true,
+      allow_update_branch: false,
+      default_branch: "master",
+      delete_branch_on_merge: false,
+      gh_pages_build_type: "legacy",
+      gh_pages_source_branch: "master",
+      gh_pages_source_path: "/",
+      web_commit_signoff_required: false,
+      environments: [
+        orgs.newEnvironment('github-pages') {
+          branch_policies+: [
+            "master"
+          ],
+          deployment_branch_policy: "selected",
+        },
+      ],
+    },
+  ],
+}
