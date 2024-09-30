@@ -107,6 +107,9 @@ orgs.newOrg('eclipse-kura') {
           deployment_branch_policy: "selected",
         },
       ],
+      workflows+: {
+        default_workflow_permissions: "write",
+      },
     },
     orgs.newRepo('kura-apps') {
       allow_merge_commit: true,
