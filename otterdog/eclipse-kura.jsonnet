@@ -21,12 +21,7 @@ orgs.newOrg('eclipse-kura') {
   _repositories+:: [
     orgs.newRepo('kura') {
       allow_rebase_merge: false,
-      code_scanning_default_languages+: [
-        "javascript",
-        "javascript-typescript",
-        "python",
-        "typescript"
-      ],
+      code_scanning_default_languages+: [],
       code_scanning_default_setup_enabled: true,
       default_branch: "develop",
       delete_branch_on_merge: false,
