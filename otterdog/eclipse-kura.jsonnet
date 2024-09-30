@@ -97,7 +97,7 @@ orgs.newOrg('eclipse-kura') {
           requires_strict_status_checks: true,
           required_status_checks : [
               "eclipse-eca-validation:eclipsefdn/eca",
-              "Lint PR",
+              "Lint PR / Validate PR title (pull_request_target)",
               "any:continuous-integration/jenkins/pr-merge",
           ],
         },
@@ -114,7 +114,7 @@ orgs.newOrg('eclipse-kura') {
           requires_strict_status_checks: true,
           required_status_checks : [
               "eclipse-eca-validation:eclipsefdn/eca",
-              "Lint PR",
+              "Lint PR / Validate PR title (pull_request_target)",
               "any:continuous-integration/jenkins/pr-merge",
           ],
         },
