@@ -95,6 +95,34 @@ orgs.newOrg('eclipse-kura') {
           require_last_push_approval: true,
           required_approving_review_count: 1,
           requires_strict_status_checks: true,
+          required_status_checks : [
+              "eclipse-eca-validation:eclipsefdn/eca",
+              "Lint PR",
+              "any:continuous-integration/jenkins/pr-merge",
+          ],
+        },
+        orgs.newBranchProtectionRule('docs-develop') {
+          dismisses_stale_reviews: true,
+          require_last_push_approval: true,
+          required_approving_review_count: 1,
+          requires_strict_status_checks: true,
+        },
+        orgs.newBranchProtectionRule('release-*') {
+          dismisses_stale_reviews: true,
+          require_last_push_approval: true,
+          required_approving_review_count: 1,
+          requires_strict_status_checks: true,
+          required_status_checks : [
+              "eclipse-eca-validation:eclipsefdn/eca",
+              "Lint PR",
+              "any:continuous-integration/jenkins/pr-merge",
+          ],
+        },
+        orgs.newBranchProtectionRule('docs-release-*') {
+          dismisses_stale_reviews: true,
+          require_last_push_approval: true,
+          required_approving_review_count: 1,
+          requires_strict_status_checks: true,
         },
       ],
       environments: [
