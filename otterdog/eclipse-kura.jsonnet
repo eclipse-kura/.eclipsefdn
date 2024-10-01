@@ -13,6 +13,11 @@ orgs.newOrg('eclipse-kura') {
     name: "Eclipse Kura",
     web_commit_signoff_required: false,
   },
+  secrets+: [
+    orgs.newOrgSecret('BOT_GITHUB_TOKEN') {
+      value: "pass:bots/iot.kura/github.com/api-token",
+    },
+  ],
   webhooks+: [
     orgs.newOrgWebhook('https://ci.eclipse.org/kura/github-webhook/') {
       content_type: "json",
