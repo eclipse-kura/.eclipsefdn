@@ -5,8 +5,7 @@ local customBranchProtectionRule(name) =
     dismisses_stale_reviews: true,
     require_last_push_approval: true,
     required_approving_review_count: 1,
-  }
-};
+  };
 
 orgs.newOrg('eclipse-kura') {
   settings+: {
