@@ -1,5 +1,13 @@
 local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
+local customBranchProtectionRule(name) = 
+  orgs.newBranchProtectionRule(name) {
+    dismisses_stale_reviews: true,
+    require_last_push_approval: true,
+    required_approving_review_count: 1,
+  }
+};
+
 orgs.newOrg('eclipse-kura') {
   settings+: {
     description: "",
@@ -87,40 +95,24 @@ orgs.newOrg('eclipse-kura') {
         },
       ],
       branch_protection_rules: [
-        orgs.newBranchProtectionRule('develop') {
-          dismisses_stale_reviews: true,
-          require_last_push_approval: true,
-          required_approving_review_count: 1,
-          requires_strict_status_checks: false,
+        customBranchProtectionRule('develop') {
           required_status_checks+: [
               "Validate PR title",
               "any:continuous-integration/jenkins/pr-merge",
           ],
         },
-        orgs.newBranchProtectionRule('docs-develop') {
-          dismisses_stale_reviews: true,
-          require_last_push_approval: true,
-          required_approving_review_count: 1,
-          requires_strict_status_checks: false,
+        customBranchProtectionRule('docs-develop') {
           required_status_checks+: [
               "Validate PR title",
           ]
         },
-        orgs.newBranchProtectionRule('release-*') {
-          dismisses_stale_reviews: true,
-          require_last_push_approval: true,
-          required_approving_review_count: 1,
-          requires_strict_status_checks: false,
+        customBranchProtectionRule('release-*') {
           required_status_checks+: [
               "Validate PR title",
               "any:continuous-integration/jenkins/pr-merge",
           ],
         },
-        orgs.newBranchProtectionRule('docs-release-*') {
-          dismisses_stale_reviews: true,
-          require_last_push_approval: true,
-          required_approving_review_count: 1,
-          requires_strict_status_checks: false,
+        customBranchProtectionRule('docs-release-*') {
           required_status_checks+: [
               "Validate PR title",
           ]
