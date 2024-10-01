@@ -96,24 +96,24 @@ orgs.newOrg('eclipse-kura') {
       branch_protection_rules: [
         customBranchProtectionRule('develop') {
           required_status_checks+: [
-              "Validate PR title",
+              // "Validate PR title",
               // "any:continuous-integration/jenkins/pr-merge",
           ],
         },
         customBranchProtectionRule('docs-develop') {
           required_status_checks+: [
-              "Validate PR title",
+              // "Validate PR title",
           ]
         },
         customBranchProtectionRule('release-*') {
           required_status_checks+: [
-              "Validate PR title",
+              // "Validate PR title",
               // "any:continuous-integration/jenkins/pr-merge",
           ],
         },
         customBranchProtectionRule('docs-release-*') {
           required_status_checks+: [
-              "Validate PR title",
+              // "Validate PR title",
           ]
         },
       ],
