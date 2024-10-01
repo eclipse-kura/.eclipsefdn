@@ -91,7 +91,7 @@ orgs.newOrg('eclipse-kura') {
           dismisses_stale_reviews: true,
           require_last_push_approval: true,
           required_approving_review_count: 1,
-          requires_strict_status_checks: true,
+          requires_strict_status_checks: false,
           required_status_checks+: [
               "Validate PR title",
               "any:continuous-integration/jenkins/pr-merge",
@@ -101,7 +101,7 @@ orgs.newOrg('eclipse-kura') {
           dismisses_stale_reviews: true,
           require_last_push_approval: true,
           required_approving_review_count: 1,
-          requires_strict_status_checks: true,
+          requires_strict_status_checks: false,
           required_status_checks+: [
               "Validate PR title",
           ]
@@ -110,7 +110,7 @@ orgs.newOrg('eclipse-kura') {
           dismisses_stale_reviews: true,
           require_last_push_approval: true,
           required_approving_review_count: 1,
-          requires_strict_status_checks: true,
+          requires_strict_status_checks: false,
           required_status_checks+: [
               "Validate PR title",
               "any:continuous-integration/jenkins/pr-merge",
@@ -120,7 +120,7 @@ orgs.newOrg('eclipse-kura') {
           dismisses_stale_reviews: true,
           require_last_push_approval: true,
           required_approving_review_count: 1,
-          requires_strict_status_checks: true,
+          requires_strict_status_checks: false,
           required_status_checks+: [
               "Validate PR title",
           ]
