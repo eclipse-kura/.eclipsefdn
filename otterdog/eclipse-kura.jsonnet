@@ -103,6 +103,10 @@ orgs.newOrg('eclipse-kura') {
           require_last_push_approval: true,
           required_approving_review_count: 1,
           requires_strict_status_checks: true,
+          required_status_checks : [
+              "eclipse-eca-validation:eclipsefdn/eca",
+              "Validate PR title",
+          ]
         },
         orgs.newBranchProtectionRule('release-*') {
           dismisses_stale_reviews: true,
@@ -120,6 +124,10 @@ orgs.newOrg('eclipse-kura') {
           require_last_push_approval: true,
           required_approving_review_count: 1,
           requires_strict_status_checks: true,
+          required_status_checks : [
+              "eclipse-eca-validation:eclipsefdn/eca",
+              "Validate PR title",
+          ]
         },
       ],
       environments: [
