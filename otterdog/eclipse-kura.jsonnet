@@ -5,9 +5,6 @@ orgs.newOrg('eclipse-kura') {
     description: "",
     name: "Eclipse Kura",
     web_commit_signoff_required: false,
-    workflows+: {
-      actions_can_approve_pull_request_reviews: false,
-    },
   },
   webhooks+: [
     orgs.newOrgWebhook('https://ci.eclipse.org/kura/github-webhook/') {
