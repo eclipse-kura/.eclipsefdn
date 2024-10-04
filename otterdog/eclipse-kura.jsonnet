@@ -32,7 +32,6 @@ orgs.newOrg('eclipse-kura') {
       allow_rebase_merge: false,
       code_scanning_default_setup_enabled: false,
       default_branch: "develop",
-      delete_branch_on_merge: false,
       dependabot_security_updates_enabled: true,
       description: "Eclipse Kura™ is a versatile framework to supercharge your edge devices, streamlining the process of configuring your gateway, connecting sensors, and IoT devices to seamlessly collect, process, and send data to the cloud.",
       gh_pages_build_type: "legacy",
