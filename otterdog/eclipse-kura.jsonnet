@@ -12,7 +12,7 @@ local customDevRuleset(name) =
         dismisses_stale_reviews: true,
         require_last_push_approval: true,
         required_approving_review_count: 1,
-    }
+    },
     required_status_checks+: [
       "Validate PR title",
       "any:continuous-integration/jenkins/pr-merge",
@@ -31,7 +31,7 @@ local customDocRuleset(name) =
         dismisses_stale_reviews: true,
         require_last_push_approval: true,
         required_approving_review_count: 1,
-    }
+    },
     required_status_checks+: [
       "Validate PR title",
     ],
