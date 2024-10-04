@@ -1,10 +1,40 @@
 local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
-local customBranchProtectionRule(name) = 
-  orgs.newBranchProtectionRule(name) {
-    dismisses_stale_reviews: true,
-    require_last_push_approval: true,
-    required_approving_review_count: 1,
+local customDevRuleset(name) =
+  orgs.newRepoRuleset(name) {
+    bypass_actors+: [
+      "@eclipse-kura/iot-kura-project-leads"
+    ],
+    include_refs+: [
+      std.format("refs/heads/%s", name),
+    ],
+    required_pull_request: {
+        dismisses_stale_reviews: true,
+        requires_last_push_approval: true,
+        required_approving_review_count: 1,
+    },
+    required_status_checks+: [
+      "Validate PR title",
+      "any:continuous-integration/jenkins/pr-merge",
+    ],
+  };
+
+local customDocRuleset(name) =
+  orgs.newRepoRuleset(name) {
+    bypass_actors+: [
+      "@eclipse-kura/iot-kura-project-leads"
+    ],
+    include_refs+: [
+      std.format("refs/heads/%s", name),
+    ],
+    required_pull_request: {
+        dismisses_stale_reviews: true,
+        requires_last_push_approval: true,
+        required_approving_review_count: 1,
+    },
+    required_status_checks+: [
+      "Validate PR title",
+    ],
   };
 
 orgs.newOrg('eclipse-kura') {
@@ -97,29 +127,11 @@ orgs.newOrg('eclipse-kura') {
           secret: "********",
         },
       ],
-      branch_protection_rules: [
-        customBranchProtectionRule('develop') {
-          required_status_checks+: [
-              "Validate PR title",
-              // "any:continuous-integration/jenkins/pr-merge",
-          ],
-        },
-        customBranchProtectionRule('docs-develop') {
-          required_status_checks+: [
-              "Validate PR title",
-          ]
-        },
-        customBranchProtectionRule('release-*') {
-          required_status_checks+: [
-              "Validate PR title",
-              // "any:continuous-integration/jenkins/pr-merge",
-          ],
-        },
-        customBranchProtectionRule('docs-release-*') {
-          required_status_checks+: [
-              "Validate PR title",
-          ]
-        },
+      rulesets: [
+        customDevRuleset('develop'),
+        customDevRuleset('release-*'),
+        customDocRuleset('docs-develop'),
+        customDocRuleset('docs-release-*')
       ],
       environments: [
         orgs.newEnvironment('github-pages') {
