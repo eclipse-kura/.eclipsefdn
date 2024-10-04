@@ -2,6 +2,7 @@ local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
 local customDevRuleset(name) =
   orgs.newRepoRuleset(name) {
+    allows_creations: true,
     bypass_actors+: [
       "@eclipse-kura/iot-kura-project-leads"
     ],
@@ -15,12 +16,13 @@ local customDevRuleset(name) =
     },
     required_status_checks+: [
       "Validate PR title",
-      "any:continuous-integration/jenkins/pr-merge",
+      "continuous-integration/jenkins/pr-merge",
     ],
   };
 
 local customDocRuleset(name) =
   orgs.newRepoRuleset(name) {
+    allows_creations: true,
     bypass_actors+: [
       "@eclipse-kura/iot-kura-project-leads"
     ],
