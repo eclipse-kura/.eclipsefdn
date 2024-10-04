@@ -10,7 +10,7 @@ local customDevRuleset(name) =
     ],
     required_pull_request: {
         dismisses_stale_reviews: true,
-        require_last_push_approval: true,
+        requires_last_push_approval: true,
         required_approving_review_count: 1,
     },
     required_status_checks+: [
@@ -29,7 +29,7 @@ local customDocRuleset(name) =
     ],
     required_pull_request: {
         dismisses_stale_reviews: true,
-        require_last_push_approval: true,
+        requires_last_push_approval: true,
         required_approving_review_count: 1,
     },
     required_status_checks+: [
