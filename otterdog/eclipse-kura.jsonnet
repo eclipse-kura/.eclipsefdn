@@ -8,7 +8,7 @@ local customDevRuleset(name) =
     include_refs+: [
       std.format("refs/heads/%s", name),
     ],
-    required_pull_request: {
+    required_pull_request+: {
         dismisses_stale_reviews: true,
         requires_last_push_approval: true,
         required_approving_review_count: 1,
@@ -27,7 +27,7 @@ local customDocRuleset(name) =
     include_refs+: [
       std.format("refs/heads/%s", name),
     ],
-    required_pull_request: {
+    required_pull_request+: {
         dismisses_stale_reviews: true,
         requires_last_push_approval: true,
         required_approving_review_count: 1,
