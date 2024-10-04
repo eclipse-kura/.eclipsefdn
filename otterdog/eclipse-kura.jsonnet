@@ -8,10 +8,11 @@ local customDevRuleset(name) =
     include_refs+: [
       std.format("refs/heads/%s", name),
     ],
-    dismisses_stale_reviews: true,
-    require_last_push_approval: true,
-    required_approving_review_count: 1,
-    requires_status_checks: true,
+    required_pull_request: {
+        dismisses_stale_reviews: true,
+        require_last_push_approval: true,
+        required_approving_review_count: 1,
+    }
     required_status_checks+: [
       "Validate PR title",
       "any:continuous-integration/jenkins/pr-merge",
@@ -26,10 +27,11 @@ local customDocRuleset(name) =
     include_refs+: [
       std.format("refs/heads/%s", name),
     ],
-    dismisses_stale_reviews: true,
-    require_last_push_approval: true,
-    required_approving_review_count: 1,
-    requires_status_checks: true,
+    required_pull_request: {
+        dismisses_stale_reviews: true,
+        require_last_push_approval: true,
+        required_approving_review_count: 1,
+    }
     required_status_checks+: [
       "Validate PR title",
     ],
