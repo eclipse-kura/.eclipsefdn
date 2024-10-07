@@ -14,10 +14,12 @@ local customDevRuleset(name) =
         requires_last_push_approval: true,
         required_approving_review_count: 1,
     },
-    required_status_checks+: [
-      "Validate PR title",
-      "continuous-integration/jenkins/pr-merge",
-    ],
+    required_status_checks+: {
+      status_checks+: [
+        "Validate PR title",
+        "continuous-integration/jenkins/pr-merge",
+      ],
+    },
   };
 
 local customDocRuleset(name) =
@@ -34,9 +36,11 @@ local customDocRuleset(name) =
         requires_last_push_approval: true,
         required_approving_review_count: 1,
     },
-    required_status_checks+: [
-      "Validate PR title",
-    ],
+    required_status_checks+: {
+      status_checks+: [
+        "Validate PR title",
+      ],
+    },
   };
 
 orgs.newOrg('eclipse-kura') {
