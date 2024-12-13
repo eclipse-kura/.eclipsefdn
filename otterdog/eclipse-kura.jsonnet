@@ -161,8 +161,13 @@ orgs.newOrg('eclipse-kura') {
       allow_merge_commit: true,
       allow_update_branch: false,
       default_branch: "master",
+      homepage: "https://eclipse.dev/kura/",
+      description: "Eclipse Kura™ website",
       delete_branch_on_merge: false,
       web_commit_signoff_required: false,
+      rulesets: [
+        customDocRuleset('hugo_migration'),
+      ],
       workflows+: {
         enabled: true,
       },
