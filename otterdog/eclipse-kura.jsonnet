@@ -164,7 +164,7 @@ orgs.newOrg('eclipse-kura') {
       delete_branch_on_merge: false,
       web_commit_signoff_required: false,
       workflows+: {
-        enabled: false,
+        enabled: true,
       },
     },
   ],
