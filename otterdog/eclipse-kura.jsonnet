@@ -43,7 +43,7 @@ local customDocRuleset(name) =
     },
   };
 
-orgs.newOrg('eclipse-kura') {
+orgs.newOrg('iot.kura', 'eclipse-kura') {
   settings+: {
     description: "",
     name: "Eclipse Kura",
