@@ -173,6 +173,9 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       },
     },
     orgs.newRepo('copyright-check') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
       default_branch: "develop",
       description: "Copyright check tool for Eclipse Kura™ projects",
       delete_branch_on_merge: true,
