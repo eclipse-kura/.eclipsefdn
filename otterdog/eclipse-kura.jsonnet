@@ -172,6 +172,18 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
         enabled: true,
       },
     },
+    orgs.newRepo('copyright-check') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      default_branch: "develop",
+      description: "Copyright check tool for Eclipse Kura™ projects",
+      delete_branch_on_merge: true,
+      web_commit_signoff_required: false,
+      workflows+: {
+        enabled: true,
+      },
+    },
   ],
 } + {
   # snippet added due to 'https://github.com/EclipseFdn/otterdog-configs/blob/main/blueprints/add-dot-github-repo.yml'
