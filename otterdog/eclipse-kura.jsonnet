@@ -1,6 +1,6 @@
 local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
-local customDevRuleset(name) =
+local customRuleset(name, checks) =
   orgs.newRepoRuleset(name) {
     allows_creations: true,
     bypass_actors+: [
@@ -15,33 +15,10 @@ local customDevRuleset(name) =
         required_approving_review_count: 1,
     },
     required_status_checks+: {
-      status_checks+: [
-        "Validate PR title",
-        "continuous-integration/jenkins/pr-merge",
-      ],
+      status_checks+: checks,
     },
   };
 
-local customDocRuleset(name) =
-  orgs.newRepoRuleset(name) {
-    allows_creations: true,
-    bypass_actors+: [
-      "@eclipse-kura/iot-kura-project-leads"
-    ],
-    include_refs+: [
-      std.format("refs/heads/%s", name),
-    ],
-    required_pull_request+: {
-        dismisses_stale_reviews: true,
-        requires_last_push_approval: true,
-        required_approving_review_count: 1,
-    },
-    required_status_checks+: {
-      status_checks+: [
-        "Validate PR title",
-      ],
-    },
-  };
 
 orgs.newOrg('iot.kura', 'eclipse-kura') {
   settings+: {
@@ -134,10 +111,20 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
         },
       ],
       rulesets: [
-        customDevRuleset('develop'),
-        customDevRuleset('release-*'),
-        customDocRuleset('docs-develop'),
-        customDocRuleset('docs-release-*')
+        customRuleset('develop', [
+          "Validate PR title",
+          "continuous-integration/jenkins/pr-merge",
+        ]),
+        customRuleset('release-*', [
+          "Validate PR title",
+          "continuous-integration/jenkins/pr-merge",
+        ]),
+        customRuleset('docs-develop', [
+          "Validate PR title",
+        ]),
+        customRuleset('docs-release-*', [
+          "Validate PR title",
+        ]),
       ],
       environments: [
         orgs.newEnvironment('github-pages') {
@@ -166,7 +153,9 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       delete_branch_on_merge: false,
       web_commit_signoff_required: false,
       rulesets: [
-        customDocRuleset('hugo_migration'),
+        customRuleset('hugo_migration', [
+          "Validate PR title",
+        ]),
       ],
       workflows+: {
         enabled: true,
@@ -180,6 +169,11 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       description: "Copyright check tool for Eclipse Kura™ projects",
       delete_branch_on_merge: true,
       web_commit_signoff_required: false,
+      rulesets: [
+        customRuleset('main', [
+          "Validate PR title",
+        ]),
+      ],
       workflows+: {
         enabled: true,
       },
