@@ -171,7 +171,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       web_commit_signoff_required: false,
       rulesets: [
         customRuleset('develop', [
-          "Validate PR title",
+          "Lint PR",
         ]),
       ],
       workflows+: {
