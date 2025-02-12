@@ -171,7 +171,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       web_commit_signoff_required: false,
       rulesets: [
         customRuleset('develop', [
-          "call-workflow-in-public-repo/Validate PR title",
+          "call-workflow-in-public-repo / Validate PR title",
         ]),
       ],
       workflows+: {
