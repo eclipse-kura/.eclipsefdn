@@ -170,7 +170,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       delete_branch_on_merge: true,
       web_commit_signoff_required: false,
       rulesets: [
-        customRuleset('main', [
+        customRuleset('develop', [
           "Validate PR title",
         ]),
       ],
