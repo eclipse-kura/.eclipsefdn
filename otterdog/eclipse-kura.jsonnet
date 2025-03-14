@@ -30,6 +30,9 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     orgs.newOrgSecret('BOT_GITHUB_TOKEN') {
       value: "pass:bots/iot.kura/github.com/api-token",
     },
+    orgs.newOrgSecret('KURA_BOT_GITHUB_TOKEN') {
+      value: "pass:bots/iot.kura/github.com/api-token-5404",
+    },
   ],
   webhooks+: [
     orgs.newOrgWebhook('https://ci.eclipse.org/kura/github-webhook/') {
