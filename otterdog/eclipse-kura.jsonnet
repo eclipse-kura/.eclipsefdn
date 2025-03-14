@@ -4,7 +4,8 @@ local customRuleset(name, checks) =
   orgs.newRepoRuleset(name) {
     allows_creations: true,
     bypass_actors+: [
-      "@eclipse-kura/iot-kura-project-leads"
+      "@eclipse-kura/iot-kura-project-leads",
+      "@eclipse-kura/merge-bypass"
     ],
     include_refs+: [
       std.format("refs/heads/%s", name),
@@ -26,6 +27,13 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     name: "Eclipse Kura",
     web_commit_signoff_required: false,
   },
+  teams+: [
+    orgs.newTeam('merge-bypass') {
+      members+: [
+        "eclipse-kura-bot",
+      ],
+    },
+  ],
   secrets+: [
     orgs.newOrgSecret('BOT_GITHUB_TOKEN') {
       value: "pass:bots/iot.kura/github.com/api-token",
