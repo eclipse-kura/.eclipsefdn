@@ -160,7 +160,6 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       web_commit_signoff_required: false,
       rulesets: [
         customRuleset('master', [
-          "Validate PR title",
           "continuous-integration/jenkins/pr-merge",
         ])
       ],
