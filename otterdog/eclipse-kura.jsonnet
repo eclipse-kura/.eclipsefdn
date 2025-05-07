@@ -148,12 +148,20 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       ],
     },
     orgs.newRepo('kura-apps') {
-      allow_merge_commit: true,
+      allow_merge_commit: false,
       allow_update_branch: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      code_scanning_default_setup_enabled: false,
       default_branch: "master",
       delete_branch_on_merge: false,
       has_wiki: false,
       web_commit_signoff_required: false,
+      rulesets: [
+        customRuleset('master', [
+          "Validate PR title",
+        ])
+      ],
     },
     orgs.newRepo('kura-website') {
       allow_merge_commit: true,
