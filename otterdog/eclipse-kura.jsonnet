@@ -189,6 +189,21 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
         enabled: true,
       },
     },
+    orgs.newRepo('kura-wires') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      allow_update_branch: true,
+      default_branch: "develop",
+      description: "Eclipse Kura™ Wires and Assets",
+      delete_branch_on_merge: true,
+      has_wiki: false,
+      web_commit_signoff_required: false,
+      squash_merge_commit_title: "PR_TITLE",
+      workflows+: {
+        enabled: true,
+      },
+    },
   ],
 } + {
   # snippet added due to 'https://github.com/EclipseFdn/otterdog-configs/blob/main/blueprints/add-dot-github-repo.yml'
