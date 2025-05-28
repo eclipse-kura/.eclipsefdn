@@ -188,15 +188,18 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       default_branch: "develop",
       description: "Eclipse Kura™ Metadata Generator",
       delete_branch_on_merge: true,
+      has_wiki: false,
+      has_projects: false,
       web_commit_signoff_required: false,
-      // rulesets: [
-      //   customRuleset('develop', [
-      //     "call-workflow-in-public-repo / Validate PR title",
-      //   ]),
-      // ],
-      // workflows+: {
-      //   enabled: true,
-      // },
+      squash_merge_commit_title: "PR_TITLE",
+      rulesets: [
+        customRuleset('develop', [
+          "call-workflow-in-public-repo / Validate PR title",
+        ]),
+      ],
+      workflows+: {
+        enabled: true,
+      },
     },
     orgs.newRepo('copyright-check') {
       allow_merge_commit: false,
