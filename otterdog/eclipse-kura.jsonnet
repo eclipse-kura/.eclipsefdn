@@ -155,7 +155,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       code_scanning_default_setup_enabled: false,
       default_branch: "develop",
       description: "Applications for Eclipse Kura™ framework",
-      delete_branch_on_merge: false,
+      delete_branch_on_merge: true,
       has_wiki: false,
       web_commit_signoff_required: false,
       rulesets: [
