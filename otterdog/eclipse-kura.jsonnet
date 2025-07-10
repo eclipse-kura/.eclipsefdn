@@ -271,8 +271,32 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
           "call-workflow-in-public-repo / Validate PR title",
           "continuous-integration/jenkins/pr-merge",
         ])
-      ],
+      ]
     },
+    orgs.newRepo('kura-command') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      allow_update_branch: true,
+      default_branch: "develop",
+      description: "Eclipse Kura™ Command addon",
+      delete_branch_on_merge: true,
+      has_wiki: false,
+      web_commit_signoff_required: false,
+      squash_merge_commit_title: "PR_TITLE"
+    },
+    orgs.newRepo('kura-networking') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      allow_update_branch: true,
+      default_branch: "develop",
+      description: "Eclipse Kura™ Networking addon",
+      delete_branch_on_merge: true,
+      has_wiki: false,
+      web_commit_signoff_required: false,
+      squash_merge_commit_title: "PR_TITLE"
+    }
   ],
 } + {
   # snippet added due to 'https://github.com/EclipseFdn/otterdog-configs/blob/main/blueprints/add-dot-github-repo.yml'
