@@ -308,7 +308,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
           "continuous-integration/jenkins/pr-merge",
         ])
       ]
-    }
+    },
     orgs.newRepo('kura-position') {
       allow_merge_commit: false,
       allow_rebase_merge: false,
@@ -318,7 +318,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       description: "Eclipse Kura™ Position addon",
       delete_branch_on_merge: true,
       has_wiki: false,
-      web_commit_signoff_required: false
+      web_commit_signoff_required: false,
     }
   ],
 } + {
