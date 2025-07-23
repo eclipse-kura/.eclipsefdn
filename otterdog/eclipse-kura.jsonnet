@@ -340,7 +340,12 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       delete_branch_on_merge: true,
       has_wiki: false,
       web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE"
+      squash_merge_commit_title: "PR_TITLE",
+      rulesets: [
+        customRuleset('develop', [
+          "call-workflow-in-public-repo / Validate PR title"
+        ])
+      ]
     }
   ],
 } + {
