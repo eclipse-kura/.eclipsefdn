@@ -56,7 +56,6 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       allow_rebase_merge: false,
       code_scanning_default_setup_enabled: false,
       default_branch: "develop",
-      dependabot_security_updates_enabled: true,
       description: "Eclipse Kura™ is a versatile framework to supercharge your edge devices, streamlining the process of configuring your gateway, connecting sensors, and IoT devices to seamlessly collect, process, and send data to the cloud.",
       gh_pages_build_type: "legacy",
       gh_pages_source_branch: "gh-pages",
@@ -72,55 +71,6 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
         "java"
       ],
       web_commit_signoff_required: false,
-      webhooks: [
-        orgs.newRepoWebhook('https://hooks.dependencyci.com/events') {
-          content_type: "json",
-          events+: [
-            "pull_request",
-            "push"
-          ],
-          secret: "********",
-        },
-        orgs.newRepoWebhook('https://app.fossa.io/hooks/github/git%2Bhttps%3A%2F%2Fgithub.com%2Feclipse%2Fkura') {
-          content_type: "json",
-          events+: [
-            "pull_request",
-            "push"
-          ],
-          secret: "********",
-        },
-        orgs.newRepoWebhook('https://notify.travis-ci.org') {
-          events+: [
-            "create",
-            "delete",
-            "issue_comment",
-            "member",
-            "public",
-            "pull_request",
-            "push",
-            "repository"
-          ],
-        },
-        orgs.newRepoWebhook('https://webhooks.gitter.im/e/65c284ac4a47d5410a93') {
-          events+: [
-            "issue_comment",
-            "issues",
-            "pull_request",
-            "push"
-          ],
-          secret: "********",
-        },
-        orgs.newRepoWebhook('https://ci.eclipse.org/kura/github-webhook/') {
-          content_type: "json",
-          events+: [
-            "create",
-            "delete",
-            "pull_request",
-            "push"
-          ],
-          secret: "********",
-        },
-      ],
       rulesets: [
         customRuleset('develop', [
           "call-workflow-in-public-repo / Validate PR title",
