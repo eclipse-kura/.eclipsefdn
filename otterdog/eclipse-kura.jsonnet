@@ -329,6 +329,18 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
           "continuous-integration/jenkins/pr-merge",
         ])
       ]
+    },
+    orgs.newRepo('add-ons-shared-libraries') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      allow_update_branch: true,
+      default_branch: "develop",
+      description: "Eclipse Kura™ projects' Jenkins shared libraries",
+      delete_branch_on_merge: true,
+      has_wiki: false,
+      web_commit_signoff_required: false,
+      squash_merge_commit_title: "PR_TITLE"
     }
   ],
 } + {
