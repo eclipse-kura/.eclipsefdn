@@ -346,6 +346,21 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
           "call-workflow-in-public-repo / Validate PR title"
         ])
       ]
+    },
+    orgs.newRepo('kura-metapackage') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      allow_update_branch: true,
+      default_branch: "develop",
+      description: "Eclipse Kura™ Metapackage",
+      delete_branch_on_merge: true,
+      has_wiki: false,
+      web_commit_signoff_required: false,
+      squash_merge_commit_title: "PR_TITLE",
+      workflows+: {
+        enabled: true,
+      },
     }
   ],
 } + {
