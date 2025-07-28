@@ -69,7 +69,8 @@ local newKuraAddonRepo(name, description, ruleset_disable=false, docs_disable=tr
       ]
     ),
     // Documentation
-    gh_pages_build_type: if docs_disable then "disabled" else "legacy",
+    gh_pages_build_type: if docs_disable then 'disabled' else 'legacy',
+    gh_pages_source_path: if docs_diable then 'None' else '/',
     environments: if docs_disable then [] else [
       orgs.newEnvironment('github-pages') {
         branch_policies+: [
