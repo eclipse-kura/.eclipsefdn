@@ -58,7 +58,7 @@ local newKuraAddonRepo(name, description, ruleset_disable=false) =
       //   "continuous-integration/jenkins/pr-merge",
       // ]),
     ]
-  }
+  };
 
 orgs.newOrg('iot.kura', 'eclipse-kura') {
   settings+: {
