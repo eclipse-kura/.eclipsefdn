@@ -150,7 +150,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     newKuraAddonRepo('kura-networking', 'Eclipse Kura™ Networking addon'),
     newKuraAddonRepo('kura-position', 'Eclipse Kura™ Position addon'),
     newKuraAddonRepo('kura-wires', 'Eclipse Kura™ Wires and Assets'),
-    newKuraAddonRepo('kura-bluetooth', 'Eclipse Kura™ Bluetooth'),
+    newKuraAddonRepo('kura-bluetooth', 'Eclipse Kura™ Bluetooth', ruleset_disable=true),
     // ****************************************
     // * CI repos
     // ****************************************
