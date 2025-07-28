@@ -28,8 +28,9 @@ local customRuleset(name, checks) =
 //   name: The repository name
 //   description: A brief description of the addon's purpose
 //   ruleset_disable: If true, disables all branch protection rulesets (default: false). Set this to "true" when creating a new repository.
+//   docs_disable: If true, disables all branch protection rulesets for documentation branches and related environments (default: true)
 //
-local newKuraAddonRepo(name, description, ruleset_disable=false) =
+local newKuraAddonRepo(name, description, ruleset_disable=false, docs_disable=true) =
   orgs.newRepo(name) {
     // Common settings
     default_branch: "develop",
@@ -57,7 +58,28 @@ local newKuraAddonRepo(name, description, ruleset_disable=false) =
         "call-workflow-in-public-repo / Validate PR title",
         "continuous-integration/jenkins/pr-merge",
       ]),
-    ]
+    ] + (
+      if docs_disable then [] else [
+        customRuleset('docs-develop', [
+          "call-workflow-in-public-repo / Validate PR title",
+        ]),
+        customRuleset('docs-release-*', [
+          "call-workflow-in-public-repo / Validate PR title",
+        ]),
+      ]
+    ),
+    // Documentation
+    gh_pages_build_type: if docs_disable then 'disabled' else 'legacy',
+    gh_pages_source_path: if docs_disable then null else '/',
+    gh_pages_source_branch: if docs_disable then null else 'gh-pages',
+    environments: if docs_disable then [] else [
+      orgs.newEnvironment('github-pages') {
+        branch_policies+: [
+          "gh-pages",
+        ],
+        deployment_branch_policy: "selected",
+      },
+    ],
   };
 
 orgs.newOrg('iot.kura', 'eclipse-kura') {
@@ -143,7 +165,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     // * Kura addons
     // ****************************************
     newKuraAddonRepo('kura-apps', 'Applications for Eclipse Kura™ framework'),
-    newKuraAddonRepo('kura-artemis', 'Eclipse Kura™ Artemis MQTT server addon'),
+    newKuraAddonRepo('kura-artemis', 'Eclipse Kura™ Artemis MQTT server addon', docs_disable=false),
     newKuraAddonRepo('kura-command', 'Eclipse Kura™ Command addon'),
     newKuraAddonRepo('kura-management-ui', 'Eclipse Kura™ Web UI'),
     newKuraAddonRepo('kura-metapackage', 'Eclipse Kura™ Metapackage'),
