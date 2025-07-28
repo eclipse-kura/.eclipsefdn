@@ -28,7 +28,7 @@ local customRuleset(name, checks) =
 //   name: The repository name
 //   description: A brief description of the addon's purpose
 //   ruleset_disable: If true, disables all branch protection rulesets (default: false). Set this to "true" when creating a new repository.
-//   docs_disable: If true, disables all branch protection rulesets for documentation branches (default: true)
+//   docs_disable: If true, disables all branch protection rulesets for documentation branches and related environments (default: true)
 //
 local newKuraAddonRepo(name, description, ruleset_disable=false, docs_disable=true) =
   orgs.newRepo(name) {
