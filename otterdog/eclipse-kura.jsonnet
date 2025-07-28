@@ -20,6 +20,45 @@ local customRuleset(name, checks) =
     },
   };
 
+// Creates a standardized repository configuration for Eclipse Kura addon projects.
+// This function provides consistent settings for all Kura addon repositories including
+// branch protection rules, merge policies, and GitHub Pages configuration.
+//
+// Parameters:
+//   name: The repository name
+//   description: A brief description of the addon's purpose
+//   ruleset_disable: If true, disables all branch protection rulesets (default: false). Set this to "true" when creating a new repository.
+//
+local newKuraAddonRepo(name, description, ruleset_disable=false) =
+  orgs.newRepo(name) {
+    // Common settings
+    default_branch: "develop",
+    description: description,
+    allow_update_branch: true,
+    delete_branch_on_merge: true,
+    has_wiki: false,
+    has_discussions: false,
+    web_commit_signoff_required: false,
+    workflows+: {
+      enabled: true,
+    },
+    // Squash merge only
+    allow_merge_commit: false,
+    allow_rebase_merge: false,
+    allow_squash_merge: true,
+    squash_merge_commit_title: "PR_TITLE",
+    // Branch protection rules
+    rulesets: if ruleset_disable then [] else [
+      customRuleset('develop', [
+        "call-workflow-in-public-repo / Validate PR title",
+        "continuous-integration/jenkins/pr-merge",
+      ]),
+      customRuleset('release-*', [
+        "call-workflow-in-public-repo / Validate PR title",
+        "continuous-integration/jenkins/pr-merge",
+      ]),
+    ]
+  };
 
 orgs.newOrg('iot.kura', 'eclipse-kura') {
   settings+: {
@@ -52,6 +91,9 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     },
   ],
   _repositories+:: [
+    // ****************************************
+    // * Kura-core
+    // ****************************************
     orgs.newRepo('kura') {
       allow_rebase_merge: false,
       code_scanning_default_setup_enabled: false,
@@ -97,24 +139,44 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
         },
       ],
     },
-    orgs.newRepo('kura-apps') {
+    // ****************************************
+    // * Kura addons
+    // ****************************************
+    newKuraAddonRepo('kura-apps', 'Applications for Eclipse Kura™ framework'),
+    newKuraAddonRepo('kura-artemis', 'Eclipse Kura™ Artemis MQTT server addon'),
+    newKuraAddonRepo('kura-command', 'Eclipse Kura™ Command addon'),
+    newKuraAddonRepo('kura-management-ui', 'Eclipse Kura™ Web UI'),
+    newKuraAddonRepo('kura-metapackage', 'Eclipse Kura™ Metapackage'),
+    newKuraAddonRepo('kura-networking', 'Eclipse Kura™ Networking addon'),
+    newKuraAddonRepo('kura-position', 'Eclipse Kura™ Position addon'),
+    newKuraAddonRepo('kura-wires', 'Eclipse Kura™ Wires and Assets'),
+    // ****************************************
+    // * CI repos
+    // ****************************************
+    orgs.newRepo('.github'),
+    orgs.newRepo('add-ons-shared-libraries') {
       allow_merge_commit: false,
-      allow_update_branch: true,
       allow_rebase_merge: false,
       allow_squash_merge: true,
-      code_scanning_default_setup_enabled: false,
+      allow_update_branch: true,
       default_branch: "develop",
-      description: "Applications for Eclipse Kura™ framework",
+      description: "Eclipse Kura™ projects' Jenkins shared libraries",
       delete_branch_on_merge: true,
       has_wiki: false,
       web_commit_signoff_required: false,
+      squash_merge_commit_title: "PR_TITLE",
       rulesets: [
         customRuleset('develop', [
-          "call-workflow-in-public-repo / Validate PR title",
-          "continuous-integration/jenkins/pr-merge",
+          "call-workflow-in-public-repo / Validate PR title"
+        ]),
+        customRuleset('plugin/*', [
+          "call-workflow-in-public-repo / Validate PR title"
         ])
-      ],
+      ]
     },
+    // ****************************************
+    // * Website and tools
+    // ****************************************
     orgs.newRepo('kura-website') {
       allow_merge_commit: true,
       allow_update_branch: false,
@@ -168,163 +230,6 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       workflows+: {
         enabled: true,
       },
-    },
-    orgs.newRepo('kura-wires') {
-      allow_merge_commit: false,
-      allow_rebase_merge: false,
-      allow_squash_merge: true,
-      allow_update_branch: true,
-      default_branch: "develop",
-      description: "Eclipse Kura™ Wires and Assets",
-      delete_branch_on_merge: true,
-      has_wiki: false,
-      web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE",
-      rulesets: [
-        customRuleset('develop', [
-          "call-workflow-in-public-repo / Validate PR title",
-          "continuous-integration/jenkins/pr-merge",
-        ]),
-      ],
-      workflows+: {
-        enabled: true,
-      },
-    },
-    orgs.newRepo('kura-management-ui') {
-      allow_merge_commit: false,
-      allow_rebase_merge: false,
-      allow_squash_merge: true,
-      allow_update_branch: true,
-      default_branch: "develop",
-      description: "Eclipse Kura™ Web UI",
-      delete_branch_on_merge: true,
-      has_wiki: false,
-      web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE",
-      rulesets: [
-        customRuleset('develop', [
-          "call-workflow-in-public-repo / Validate PR title",
-          "continuous-integration/jenkins/pr-merge",
-        ])
-      ],
-      workflows+: {
-        enabled: true,
-      },
-    },
-    orgs.newRepo('kura-artemis') {
-      allow_merge_commit: false,
-      allow_rebase_merge: false,
-      allow_squash_merge: true,
-      allow_update_branch: true,
-      default_branch: "develop",
-      description: "Eclipse Kura™ Artemis MQTT server addon",
-      gh_pages_build_type: "legacy",
-      gh_pages_source_branch: "gh-pages",
-      gh_pages_source_path: "/",
-      delete_branch_on_merge: true,
-      has_wiki: false,
-      web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE",
-      rulesets: [
-        customRuleset('develop', [
-          "call-workflow-in-public-repo / Validate PR title",
-          "continuous-integration/jenkins/pr-merge",
-        ])
-      ]
-    },
-    orgs.newRepo('kura-command') {
-      allow_merge_commit: false,
-      allow_rebase_merge: false,
-      allow_squash_merge: true,
-      allow_update_branch: true,
-      default_branch: "develop",
-      description: "Eclipse Kura™ Command addon",
-      delete_branch_on_merge: true,
-      has_wiki: false,
-      web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE",
-      rulesets: [
-        customRuleset('develop', [
-          "call-workflow-in-public-repo / Validate PR title",
-          "continuous-integration/jenkins/pr-merge",
-        ])
-      ]
-    },
-    orgs.newRepo('kura-networking') {
-      allow_merge_commit: false,
-      allow_rebase_merge: false,
-      allow_squash_merge: true,
-      allow_update_branch: true,
-      default_branch: "develop",
-      description: "Eclipse Kura™ Networking addon",
-      delete_branch_on_merge: true,
-      has_wiki: false,
-      web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE",
-      rulesets: [
-        customRuleset('develop', [
-          "call-workflow-in-public-repo / Validate PR title",
-          "continuous-integration/jenkins/pr-merge",
-        ])
-      ]
-    },
-    orgs.newRepo('kura-position') {
-      allow_merge_commit: false,
-      allow_rebase_merge: false,
-      allow_squash_merge: true,
-      allow_update_branch: true,
-      default_branch: "develop",
-      description: "Eclipse Kura™ Position addon",
-      delete_branch_on_merge: true,
-      has_wiki: false,
-      web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE",
-      rulesets: [
-        customRuleset('develop', [
-          "call-workflow-in-public-repo / Validate PR title",
-          "continuous-integration/jenkins/pr-merge",
-        ])
-      ]
-    },
-    orgs.newRepo('add-ons-shared-libraries') {
-      allow_merge_commit: false,
-      allow_rebase_merge: false,
-      allow_squash_merge: true,
-      allow_update_branch: true,
-      default_branch: "develop",
-      description: "Eclipse Kura™ projects' Jenkins shared libraries",
-      delete_branch_on_merge: true,
-      has_wiki: false,
-      web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE",
-      rulesets: [
-        customRuleset('develop', [
-          "call-workflow-in-public-repo / Validate PR title"
-        ]),
-        customRuleset('plugin/*', [
-          "call-workflow-in-public-repo / Validate PR title"
-        ])
-      ]
-    },
-    orgs.newRepo('kura-metapackage') {
-      allow_merge_commit: false,
-      allow_rebase_merge: false,
-      allow_squash_merge: true,
-      allow_update_branch: true,
-      default_branch: "develop",
-      description: "Eclipse Kura™ Metapackage",
-      delete_branch_on_merge: true,
-      has_wiki: false,
-      web_commit_signoff_required: false,
-      squash_merge_commit_title: "PR_TITLE",
-      workflows+: {
-        enabled: true,
-      },
     }
-  ],
-} + {
-  # snippet added due to 'https://github.com/EclipseFdn/otterdog-configs/blob/main/blueprints/add-dot-github-repo.yml'
-  _repositories+:: [
-    orgs.newRepo('.github')
   ],
 }
