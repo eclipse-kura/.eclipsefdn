@@ -53,10 +53,10 @@ local newKuraAddonRepo(name, description, ruleset_disable=false) =
         "call-workflow-in-public-repo / Validate PR title",
         "continuous-integration/jenkins/pr-merge",
       ]),
-      // customRuleset('release-*', [
-      //   "call-workflow-in-public-repo / Validate PR title",
-      //   "continuous-integration/jenkins/pr-merge",
-      // ]),
+      customRuleset('release-*', [
+        "call-workflow-in-public-repo / Validate PR title",
+        "continuous-integration/jenkins/pr-merge",
+      ]),
     ]
   };
 
@@ -146,7 +146,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     newKuraAddonRepo('kura-artemis', 'Eclipse Kura™ Artemis MQTT server addon'),
     newKuraAddonRepo('kura-command', 'Eclipse Kura™ Command addon'),
     newKuraAddonRepo('kura-management-ui', 'Eclipse Kura™ Web UI'),
-    newKuraAddonRepo('kura-metapackage', 'Eclipse Kura™ Metapackage', ruleset_disable=true),
+    newKuraAddonRepo('kura-metapackage', 'Eclipse Kura™ Metapackage'),
     newKuraAddonRepo('kura-networking', 'Eclipse Kura™ Networking addon'),
     newKuraAddonRepo('kura-position', 'Eclipse Kura™ Position addon'),
     newKuraAddonRepo('kura-wires', 'Eclipse Kura™ Wires and Assets'),
