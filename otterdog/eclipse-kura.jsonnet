@@ -173,7 +173,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
           "call-workflow-in-public-repo / Validate PR title"
         ])
       ]
-    }
+    },
     // ****************************************
     // * Website and tools
     // ****************************************
