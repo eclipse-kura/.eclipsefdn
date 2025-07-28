@@ -68,6 +68,14 @@ local newKuraAddonRepo(name, description, ruleset_disable=false, docs_disable=tr
         ]),
       ]
     ),
+    environments: if docs_disable then [] else [
+      orgs.newEnvironment('github-pages') {
+        branch_policies+: [
+          "gh-pages",
+        ],
+        deployment_branch_policy: "selected",
+      },
+    ],
   };
 
 orgs.newOrg('iot.kura', 'eclipse-kura') {
