@@ -153,7 +153,20 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     // ****************************************
     // * CI repos
     // ****************************************
-    orgs.newRepo('.github'),
+    orgs.newRepo('.github') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      description: "Eclipse Kura™ automation repository",
+      delete_branch_on_merge: true,
+      squash_merge_commit_title: "PR_TITLE",
+      has_wiki: false,
+      rulesets: [
+        customRuleset('main', [
+          "call-workflow-in-public-repo / Validate PR title"
+        ]),
+      ]
+    },
     orgs.newRepo('add-ons-shared-libraries') {
       allow_merge_commit: false,
       allow_rebase_merge: false,
