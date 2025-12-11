@@ -145,10 +145,10 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
           "continuous-integration/jenkins/pr-merge",
         ]),
         customRuleset('docs-develop', [
-          "Validate PR title",
+          "call-workflow-in-public-repo / Validate PR title",
         ]),
         customRuleset('docs-release-*', [
-          "Validate PR title",
+          "call-workflow-in-public-repo / Validate PR title",
         ]),
       ],
       environments: [
