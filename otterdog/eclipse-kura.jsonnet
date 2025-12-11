@@ -224,9 +224,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       delete_branch_on_merge: false,
       web_commit_signoff_required: false,
       rulesets: [
-        customRuleset('hugo_migration', [
-          "call-workflow-in-public-repo / Validate PR title"
-        ]),
+        customRuleset('hugo_migration', []),
       ],
       workflows+: {
         enabled: true,
