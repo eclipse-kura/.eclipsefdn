@@ -176,6 +176,8 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     newKuraAddonRepo('kura-gpio', 'Eclipse Kura™ GPIO addon', ruleset_disable=true),
     newKuraAddonRepo('kura-opcua', 'Eclipse Kura™ OPC UA addon'),
     newKuraAddonRepo('kura-can', 'Eclipse Kura™ CAN addon', ruleset_disable=true),
+    newKuraAddonRepo('kura-triton', 'Eclipse Kura™ Nvidia Triton™ addon', ruleset_disable=true),
+    newKuraAddonRepo('kura-deployment', 'Eclipse Kura™ Deployment addon', ruleset_disable=true),
     // ****************************************
     // * CI repos
     // ****************************************
