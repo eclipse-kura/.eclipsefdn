@@ -210,9 +210,9 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
         customRuleset('develop', [
           "call-workflow-in-public-repo / Validate PR title"
         ]),
-        customRuleset('plugin/*', [
-          "call-workflow-in-public-repo / Validate PR title"
-        ])
+        // customRuleset('plugin/*', [
+        //   "call-workflow-in-public-repo / Validate PR title"
+        // ])
       ]
     },
     // ****************************************
