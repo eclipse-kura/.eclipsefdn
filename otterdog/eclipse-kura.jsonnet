@@ -278,11 +278,11 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       description: "Additional ruleset for maven-enforcer-plugin",
       delete_branch_on_merge: true,
       web_commit_signoff_required: false,
-      // rulesets: [
-      //   customRuleset('develop', [
-      //     "call-workflow-in-public-repo / Validate PR title",
-      //   ]),
-      // ],
+      rulesets: [
+        customRuleset('develop', [
+          "call-workflow-in-public-repo / Validate PR title",
+        ]),
+      ],
       workflows+: {
         enabled: true,
       },
