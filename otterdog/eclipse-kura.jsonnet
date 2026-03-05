@@ -173,7 +173,7 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     newKuraAddonRepo('kura-position', 'Eclipse Kura™ Position addon'),
     newKuraAddonRepo('kura-wires', 'Eclipse Kura™ Wires and Assets'),
     newKuraAddonRepo('kura-bluetooth', 'Eclipse Kura™ Bluetooth'),
-    newKuraAddonRepo('kura-gpio', 'Eclipse Kura™ GPIO addon', ruleset_disable=true),
+    newKuraAddonRepo('kura-gpio', 'Eclipse Kura™ GPIO addon'),
     newKuraAddonRepo('kura-opcua', 'Eclipse Kura™ OPC UA addon'),
     newKuraAddonRepo('kura-can', 'Eclipse Kura™ CAN addon'),
     newKuraAddonRepo('kura-triton', 'Eclipse Kura™ Nvidia Triton™ addon'),
