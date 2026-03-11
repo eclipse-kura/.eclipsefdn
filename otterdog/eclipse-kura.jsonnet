@@ -16,6 +16,7 @@ local customRuleset(name, checks) =
         required_approving_review_count: 1,
     },
     required_status_checks+: {
+      do_not_enforce_on_create: true,
       status_checks+: checks,
     },
   };
