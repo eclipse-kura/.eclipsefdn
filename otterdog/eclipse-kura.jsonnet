@@ -2,7 +2,6 @@ local orgs = import 'vendor/otterdog-defaults/otterdog-defaults.libsonnet';
 
 local customRuleset(name, checks) =
   orgs.newRepoRuleset(name) {
-    do_not_enforce_on_create: true,
     allows_creations: true,
     bypass_actors+: [
       "@eclipse-kura/iot-kura-project-leads",
@@ -17,6 +16,7 @@ local customRuleset(name, checks) =
         required_approving_review_count: 1,
     },
     required_status_checks+: {
+      do_not_enforce_on_create: true,
       status_checks+: checks,
     },
   };
