@@ -88,6 +88,9 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     description: "",
     name: "Eclipse Kura",
     web_commit_signoff_required: false,
+    workflows+: {
+        fork_pr_approval_policy: "all_external_contributors"
+    }
   },
   teams+: [
     orgs.newTeam('merge-bypass') {
