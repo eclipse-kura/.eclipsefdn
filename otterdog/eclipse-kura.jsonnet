@@ -88,6 +88,8 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     description: "",
     name: "Eclipse Kura",
     web_commit_signoff_required: false,
+    has_discussions: true,
+    discussion_source_repository: "eclipse-kura/kura",
     workflows+: {
         fork_pr_approval_policy: "all_external_contributors"
     }
