@@ -16,6 +16,7 @@ local customRuleset(name, checks) =
         required_approving_review_count: 1,
     },
     required_status_checks+: {
+      do_not_enforce_on_create: true,
       status_checks+: checks,
     },
   };
@@ -87,6 +88,11 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     description: "",
     name: "Eclipse Kura",
     web_commit_signoff_required: false,
+    has_discussions: true,
+    discussion_source_repository: "eclipse-kura/kura",
+    workflows+: {
+        fork_pr_approval_policy: "all_external_contributors"
+    }
   },
   teams+: [
     orgs.newTeam('merge-bypass') {
@@ -173,11 +179,12 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     newKuraAddonRepo('kura-position', 'Eclipse Kura™ Position addon'),
     newKuraAddonRepo('kura-wires', 'Eclipse Kura™ Wires and Assets'),
     newKuraAddonRepo('kura-bluetooth', 'Eclipse Kura™ Bluetooth'),
-    newKuraAddonRepo('kura-gpio', 'Eclipse Kura™ GPIO addon', ruleset_disable=true),
+    newKuraAddonRepo('kura-gpio', 'Eclipse Kura™ GPIO addon'),
     newKuraAddonRepo('kura-opcua', 'Eclipse Kura™ OPC UA addon'),
     newKuraAddonRepo('kura-can', 'Eclipse Kura™ CAN addon'),
-    newKuraAddonRepo('kura-triton', 'Eclipse Kura™ Nvidia Triton™ addon', ruleset_disable=true),
-    newKuraAddonRepo('kura-deployment', 'Eclipse Kura™ Deployment addon', ruleset_disable=true),
+    newKuraAddonRepo('kura-triton', 'Eclipse Kura™ Nvidia Triton™ addon'),
+    newKuraAddonRepo('kura-deployment', 'Eclipse Kura™ Deployment addon'),
+    newKuraAddonRepo('kura-camel', 'Eclipse Kura™ Camel addon', ruleset_disable=true),
     newKuraAddonRepo('kura-archetype', 'Eclipse Kura™ Maven Archetype', ruleset_disable=true),
     // ****************************************
     // * CI repos
@@ -260,6 +267,23 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
       allow_squash_merge: true,
       default_branch: "develop",
       description: "Copyright check tool for Eclipse Kura™ projects",
+      delete_branch_on_merge: true,
+      web_commit_signoff_required: false,
+      rulesets: [
+        customRuleset('develop', [
+          "call-workflow-in-public-repo / Validate PR title",
+        ]),
+      ],
+      workflows+: {
+        enabled: true,
+      },
+    },
+    orgs.newRepo('maven-enforcer-rules') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      default_branch: "develop",
+      description: "Additional ruleset for maven-enforcer-plugin",
       delete_branch_on_merge: true,
       web_commit_signoff_required: false,
       rulesets: [
