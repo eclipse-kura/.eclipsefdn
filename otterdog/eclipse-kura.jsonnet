@@ -171,21 +171,21 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
     // * Kura addons
     // ****************************************
     newKuraAddonRepo('kura-apps', 'Applications for Eclipse Kura™ framework'),
+    newKuraAddonRepo('kura-archetype', 'Eclipse Kura™ Maven Archetype'),
     newKuraAddonRepo('kura-artemis', 'Eclipse Kura™ Artemis MQTT server addon', docs_disable=false),
+    newKuraAddonRepo('kura-bluetooth', 'Eclipse Kura™ Bluetooth'),
+    newKuraAddonRepo('kura-camel', 'Eclipse Kura™ Camel addon'),
+    newKuraAddonRepo('kura-can', 'Eclipse Kura™ CAN addon'),
     newKuraAddonRepo('kura-command', 'Eclipse Kura™ Command addon'),
+    newKuraAddonRepo('kura-deployment', 'Eclipse Kura™ Deployment addon'),
+    newKuraAddonRepo('kura-gpio', 'Eclipse Kura™ GPIO addon'),
     newKuraAddonRepo('kura-management-ui', 'Eclipse Kura™ Web UI'),
     newKuraAddonRepo('kura-metapackage', 'Eclipse Kura™ Metapackage'),
     newKuraAddonRepo('kura-networking', 'Eclipse Kura™ Networking addon'),
-    newKuraAddonRepo('kura-position', 'Eclipse Kura™ Position addon'),
-    newKuraAddonRepo('kura-wires', 'Eclipse Kura™ Wires and Assets'),
-    newKuraAddonRepo('kura-bluetooth', 'Eclipse Kura™ Bluetooth'),
-    newKuraAddonRepo('kura-gpio', 'Eclipse Kura™ GPIO addon'),
     newKuraAddonRepo('kura-opcua', 'Eclipse Kura™ OPC UA addon'),
-    newKuraAddonRepo('kura-can', 'Eclipse Kura™ CAN addon'),
+    newKuraAddonRepo('kura-position', 'Eclipse Kura™ Position addon'),
     newKuraAddonRepo('kura-triton', 'Eclipse Kura™ Nvidia Triton™ addon'),
-    newKuraAddonRepo('kura-deployment', 'Eclipse Kura™ Deployment addon'),
-    newKuraAddonRepo('kura-camel', 'Eclipse Kura™ Camel addon'),
-    newKuraAddonRepo('kura-archetype', 'Eclipse Kura™ Maven Archetype'),
+    newKuraAddonRepo('kura-wires', 'Eclipse Kura™ Wires and Assets'),
     // ****************************************
     // * CI repos
     // ****************************************
