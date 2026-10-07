@@ -282,6 +282,23 @@ orgs.newOrg('iot.kura', 'eclipse-kura') {
         enabled: true,
       },
     },
+    orgs.newRepo('pmd-rulesets') {
+      allow_merge_commit: false,
+      allow_rebase_merge: false,
+      allow_squash_merge: true,
+      default_branch: "develop",
+      description: "Eurotech's PMD ruleset for Kura projects",
+      delete_branch_on_merge: true,
+      web_commit_signoff_required: false,
+      rulesets: [
+        customRuleset('develop', [
+          "call-workflow-in-public-repo / Validate PR title",
+        ]),
+      ],
+      workflows+: {
+        enabled: true,
+      },
+    },
     orgs.newRepo('maven-enforcer-rules') {
       allow_merge_commit: false,
       allow_rebase_merge: false,
